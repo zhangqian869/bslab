@@ -1,11 +1,11 @@
 #!/bin/bash
 
-cp ../../../clinVar/core/mybpc3 .
- cp ../../../clinVar/core/myh6 .
-cp ../../../clinVar/core/myh7 .
-cp ../../../clinVar/core/myl2 .
- cp ../../../clinVar/core/myl7 .
- cp ../../../clinVar/core/myl3 .
- cp ../../../clinVar/extraGenes/mypn .
- cp ../../../clinVar/core/ttn .
+cp ..//core/mybpc3 .
+ cp ..//core/myh6 .
+cp ..//core/myh7 .
+cp ..//core/myl2 .
+ cp ..//core/myl7 .
+ cp ..//core/myl3 .
+ cp ..//extraGenes/mypn .
+ cp ..//core/ttn .
 

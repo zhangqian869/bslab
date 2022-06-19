@@ -1,10 +1,10 @@
 #!/bin/bash
 
- cp ../../../ptms/associate/ank2 .
-cp ../../../ptms/associate/crip3 .
-cp ../../../ptms/associate/flnc .
-cp ../../../ptms/associate/myoz2 .
-cp ../../../ptms/associate/sptb .
-cp ../../../ptms/core/actn2 .
+ cp ..//associate/ank2 .
+cp ..//associate/crip3 .
+cp ..//associate/flnc .
+cp ..//associate/myoz2 .
+cp ..//associate/sptb .
+cp ..//core/actn2 .
 
 

@@ -9,7 +9,8 @@
 
 # extact the disease associated mutations 
 
-input=$1  # e.g. actc1_clinvar_result.txt
-output=$2  # actc1
 
-grep "p\." $input | awk -F "p." '{ print $2 }' | awk -F ")" '{ print $1 }' > $output
+for i in `cat geneName`
+do
+grep "p\." ${i}_clinvar_result.txt | awk '{ print $2 }' | sed -e 's/(p.//g' | sed -e 's/)//'g | sort -k 1 -g | uniq > $i
+done

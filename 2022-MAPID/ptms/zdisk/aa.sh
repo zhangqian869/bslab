@@ -1,14 +1,14 @@
 #!/bin/bash
 
-cp ../../../ptms/associate/des .
- cp ../../../ptms/associate/capza2 .
- cp ../../../ptms/associate/obscn .
- cp ../../../ptms/associate/fhl2 .
- cp ../../../ptms/associate/nebl .
- cp ../../../ptms/associate/myom1 .
- cp ../../../ptms/extraGenes/neb .
- cp ../../../ptms/extraGenes/myot .
- cp ../../../ptms/extraGenes/enh2 .
-cp ../../../ptms/associate/cryab .
+cp ..//associate/des .
+ cp ..//associate/capza2 .
+ cp ..//associate/obscn .
+ cp ..//associate/fhl2 .
+ cp ..//associate/nebl .
+ cp ..//associate/myom1 .
+ cp ..//extraGenes/neb .
+ cp ..//extraGenes/myot .
+ cp ..//extraGenes/enh2 .
+cp ..//associate/cryab .
 
 
