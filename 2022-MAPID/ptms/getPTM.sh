@@ -6,7 +6,7 @@
 # !!! regardless of number of recordings reporting the phosphorylation site !!!
 # !!! only human  !!!
 
-gene=$1  #gene name
+gene=$1  #gene name, upper case: NEB
 output=$2
 
-grep -i $gene Phosphorylation_site_dataset | grep human | grep "\-p" | awk -F "-p" '{ print $1 }'| awk '{ print $NF }' | uniq > $output
+awk '{ if ( $2 == "'$gene'" ) print }' Phosphorylation_site_dataset  | grep human | grep "\-p" | awk -F "-p" '{ print $1 }'| awk '{ print $NF }' | uniq > $output
