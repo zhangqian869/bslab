@@ -1,0 +1,11 @@
+parm x.top [traj]
+parm cdomain.parm7 [cdomain]
+trajin ngamd1.nc parm [traj]
+trajin ngamd2.nc parm [traj]
+trajin ngamd3.nc parm [traj]
+reference cdomain.crd parm [cdomain] [refff]
+rms toCdomain :82-146@CA ref [refff] :1-65@CA out rmsd
+grid grid.dat 150 0.5 150 0.5 150 0.5 center :80-145@CA name dgrid (:1-150)&!@H= byres normdensity pdb g.pdb max 0.01 
+grid watgrid.dat 150 0.5 150 0.5 150 0.5 center :80-145@CA name dwatgrid :WAT byres normdensity pdb gwat.pdb max 0.01 
+grid cagrid.dat 150 0.5 150 0.5 150 0.5 center :80-145@CA name dcagrid :CA byres normdensity pdb gca.pdb max 0.01 
+
