@@ -1,0 +1,11 @@
+parm wt.top [wt]
+parm ubi.top [ubi]
+trajin run1.nc parm [wt]
+trajin run2.nc parm [wt]
+reference ubi_initial.rst7 parm [ubi] [refff]
+rms toPore :340-364,972-996,1604-1628,2236-2260 ref [refff] :340-364,1124-1148,1908-1932,2692-2716 out pore.rmsd
+grid  tm.dat 150 0.5 150 0.5 150 0.5 :130-398,762-1030,1394-1662,2026-2294&!@H= pdb grid.pdb max 0.01 center :340-364,972-996,1604-1628,2236-2260 normdensity byres
+grid  popc.dat 250 0.5 250 0.5 250 0.5 :POPC&!@H= pdb grid.pdb max 0.01 center :340-364,972-996,1604-1628,2236-2260 normdensity byres
+grid  pot.dat 150 0.5 150 0.5 150 0.5 :POT pdb pot.pdb max 0.01 center :340-364,972-996,1604-1628,2236-2260 normdensity byres
+grid  wat.dat 150 0.5 150 0.5 150 0.5 :WAT@O pdb wat.pdb max 0.01 center :340-364,972-996,1604-1628,2236-2260 normdensity byres
+
