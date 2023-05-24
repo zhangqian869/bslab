@@ -7,7 +7,7 @@ net=/home/binsun/Apps/PRS/MD-TASK-master/calc_network.py
 
 
 
-# Here the steady.dcd is at the last of the cMD where the standard deviation of RMSD is around 2 AA, which indicates that the simulation is stable
+# We used the conventional MD to obtain the covariance matrix
 
 
 #---- First align all structures to the pdb 2XZP (APO's) secondary elements in the RecA2 domain
@@ -36,8 +36,8 @@ mv header final.xyz
 
 cat > temptrajin << EOD
 parm step3_input.psf [md]
-trajin run1.dcd 5000 7678 parm [md] # the last 200 ns
-trajin run2.dcd 5000 7678 parm [md] # the last 200 ns
+trajin run1.dcd 1 4000 parm [md] 
+trajin run2.dcd 1 4000 parm [md] 
 reference 2xzp.pdb ref [refff]
 rms toRecA2 :407-417,447-451,468-484,491-495,498-511,537-541,557-564,570-575,584-595@CA ref [refff] :407-417,447-451,468-484,491-495,498-511,537-541,557-564,570-575,584-595@CA out rmsd
 strip !:1-596
