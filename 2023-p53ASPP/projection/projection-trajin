@@ -1,0 +1,5 @@
+parm struc.pdb
+trajin new.xtc 1 -1
+reference ref1.pdb [R1]  # this pdb has been processed by VMD to make sure that the bonds between atoms 431 and 711 is parallel to the X axis
+rmsd dddd :1-232,268-434@BB ref [R1] out rmsd.dat
+trajout fitted.xtc
