@@ -1,5 +1,5 @@
 This folder contains scripts supporting the p53-ASPP computation work.
 
-The MD trajectories of this project are deposited into the Zenodo repository (https://zenodo.org/records/10349773). 
+The MD trajectories of this project are deposited into the Zenodo repository (https://zenodo.org/records/10530890). 
 Due to the file size limitation and uploading efficiency, we extracted every 100th frame of  the Martini CGMD trajectories to compress the file size. 
 Note: In our analysis, we extracted every 40th frame to perform the analysis.
