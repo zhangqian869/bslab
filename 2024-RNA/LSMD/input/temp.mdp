@@ -1,0 +1,51 @@
+; Run parameters
+integrator              = md-vv
+;tinit                   = 0
+nsteps                  = 50000 ; 0.1 ns
+dt                      = 0.002
+
+; Output parameters
+nstxout                 = 0
+nstvout                 = 0
+nstenergy               = 500
+nstlog                  = 500
+nstxout-compressed      = 500;1ps
+energygrps              = nucleic Lig ions_waters
+energygrp-table         = nucleic Lig
+
+; Neighbor searching
+nstlist                 = 5 ; 10fs
+ns-type                 = grid
+pbc                     = xyz
+rlist                   = 1.1
+cutoff-scheme           = group
+
+; Electrostatics and VdW
+coulombtype             = pme-user
+rcoulomb                = 1.1
+vdwtype                 = user
+rvdw                    = 1.1
+
+
+tcoupl                  = Nose-Hoover
+tc_grps                 = SOLU SOLV
+tau_t                   = 1.0 1.0
+ref_t                   = 300 300
+;
+pcoupl                  = no
+;
+nstcomm                 = 10
+comm_mode               = linear
+comm_grps               = SOLU SOLV
+
+
+; Velocity generation
+gen_vel                 = no
+
+; Bond parameters
+continuation    = yes
+constraints             = h-bonds
+constraint-algorithm    = lincs
+lincs-order             = 6
+lincs-iter              = 2
+tinit                   = XXX
