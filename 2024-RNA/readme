@@ -1,0 +1,2 @@
+This folder holds the scripts used to performe the multi-replica well-tempered metadynamics (WT-MetaD), the local-scaled MD, and the Brownian Dynamics (using BrownDye software). 
+Jupyter-notebooks used for analysing data are also inculded
