@@ -1,0 +1,36 @@
+# Activate MOLINFO functionalities
+MOLINFO STRUCTURE=step3_input.pdb 
+WHOLEMOLECULES ENTITY0=1-1066 ENTITY1=1067-1087
+# you might want to use MOLINFO shortcuts
+# define the distance between small molecule and the RNA
+c1: GROUP NDX_FILE=newindx.ndx NDX_GROUP=nucleic_backbone
+c2: GROUP NDX_FILE=newindx.ndx NDX_GROUP=ligand_heavy_atoms
+c1_center: COM ATOMS=c1
+c2_center: COM ATOMS=c2
+d1: DISTANCE ATOMS=c1_center,c2_center NOPBC
+
+restr: UPPER_WALLS ARG=d1 AT=7 KAPPA=2000
+
+
+## Restraining d1 to a certain wall: since we must enable the CALC_RCT that needs a GRID
+
+# Activate well-tempered metadynamics
+METAD ...
+   ARG=d1
+   # Deposit a Gaussian every 500 time steps, with initial height equal to 1.2 kJ/mol 
+   PACE=500 HEIGHT=1.2
+   # The bias factor should be wisely chosen 
+   BIASFACTOR=10
+   # Gaussian width (sigma) should be chosen based on CV fluctuation in unbiased run 
+   SIGMA=0.1
+   CALC_RCT
+   TEMP=300.0
+   LABEL=metad
+   GRID_MIN=0.0
+   GRID_MAX=8.0
+   # Gaussians will be written to file and also stored on grid 
+   FILE=HILLS 
+... METAD
+# Print both collective variables on COLVAR file every 10 steps
+PRINT ARG=d1 FILE=distance.dat STRIDE=100
+PRINT ARG=metad.* FILE=metad_data.dat STRIDE=500

@@ -1,0 +1,64 @@
+# Activate MOLINFO functionalities
+MOLINFO STRUCTURE=step3_input.pdb 
+WHOLEMOLECULES ENTITY0=1-1066 ENTITY1=1067-1087
+# you might want to use MOLINFO shortcuts
+# define the distance between small molecule and the RNA
+c1: GROUP NDX_FILE=newindx.ndx NDX_GROUP=nucleic_backbone
+c2: GROUP NDX_FILE=newindx.ndx NDX_GROUP=ligand_heavy_atoms
+c1_center: COM ATOMS=c1
+c2_center: COM ATOMS=c2
+d1: DISTANCE ATOMS=c1_center,c2_center NOPBC
+
+restr: UPPER_WALLS ARG=d1 AT=7 KAPPA=2000
+
+# distance to binding site, 6,8,22,24
+u22u24center: COM ATOMS=165-194,228-258,682-712,743-772
+distoU24: DISTANCE ATOMS=c2_center,u22u24center NOPBC
+
+# coordination number
+#
+#
+cn: COORDINATION GROUPA=1-1066 GROUPB=1067-1087 R_0=0.3 NLIST NL_CUTOFF=0.5 NL_STRIDE=100
+
+## Restraining d1 to a certain wall: since we must enable the CALC_RCT that needs a GRID
+
+# Activate well-tempered metadynamics
+METAD ...
+   ARG=d1
+   # Deposit a Gaussian every 500 time steps, with initial height equal to 1.2 kJ/mol 
+   PACE=100000000 HEIGHT=0.0
+   # The bias factor should be wisely chosen 
+   BIASFACTOR=10
+   # Gaussian width (sigma) should be chosen based on CV fluctuation in unbiased run 
+   SIGMA=0.1
+   CALC_RCT
+   TEMP=300.0
+   LABEL=metad
+   GRID_MIN=0.0
+   GRID_MAX=8.0
+   RESTART=YES
+   # Gaussians will be written to file and also stored on grid 
+   FILE=HILLS 
+... METAD
+# Print both collective variables on COLVAR file every 10 steps
+as: REWEIGHT_METAD TEMP=300
+discn: HISTOGRAM ...
+ARG=distoU24,cn
+GRID_MIN=0,0
+GRID_MAX=8.,150
+GRID_BIN=100,100
+BANDWIDTH=0.05,1
+LOGWEIGHTS=as,as
+...
+# STRIDE=50 GRID_MIN=0 GRID_MAX=8 GRID_BIN=50 BANDWIDTH=0.05 LOGWEIGHTS=as
+#hhpsi: HISTOGRAM ARG=cn STRIDE=50 GRID_MIN=0 GRID_MAX=30 GRID_BIN=50 BANDWIDTH=0.05 LOGWEIGHTS=as
+# Convert histograms h(s) to free energies F(s) = -kBT * log(h(s))
+energy: CONVERT_TO_FES GRID=discn TEMP=300
+# Print out the free energies F(s) to file once the entire trajectory is processed
+DUMPGRID GRID=energy FILE=discn_energy.dat
+DUMPGRID GRID=discn FILE=discn.dat
+
+
+PRINT ARG=cn FILE=cn.dat 
+PRINT ARG=distoU24 FILE=u24dis.dat 
+
