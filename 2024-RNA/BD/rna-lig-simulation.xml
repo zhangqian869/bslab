@@ -1,0 +1,51 @@
+<root>
+  <n-threads> 10 </n-threads>
+  <solvent-file> rna-lig-solvent.xml </solvent-file>
+  <output> results.xml </output>
+  <n-trajectories> 100000 </n-trajectories>
+  <n-trajectories-per-output> 10 </n-trajectories-per-output>
+  <n-copies> 200 </n-copies>
+  <n-bin-copies> 200 </n-bin-copies>
+  <n-steps> 1000000 </n-steps>
+  <seed> 11111113 </seed>
+  <max-n-steps> 1000000 </max-n-steps>
+  <n-we-steps-per-output> 1000 </n-we-steps-per-output>
+  <trajectory-file> Traj </trajectory-file>
+  <molecule-pair>
+    <molecule0>
+      <atoms> rna-surface-atoms.xml </atoms>
+      <charge-squared> rna-q2-cheby.xml </charge-squared>
+      <hydro-radius> rna-hydro-radius.xml </hydro-radius>
+      <ellipsoids> rna-ellipsoids.xml </ellipsoids>
+      <electric-field>
+        <grid> rna-PE0.dx </grid>
+        <multipole-field> rna-mpole.xml </multipole-field>
+      </electric-field>
+      <total-charge> -96.0375 </total-charge>
+      <desolvation-field>
+        <grid> born-rna-PE0.dx </grid>
+      </desolvation-field>
+    </molecule0>
+    <molecule1>
+      <atoms> lig-surface-atoms.xml </atoms>
+      <eff-charges> lig-cheby.xml </eff-charges>
+      <charge-squared> lig-q2-cheby.xml </charge-squared>
+      <hydro-radius> lig-hydro-radius.xml </hydro-radius>
+      <ellipsoids> lig-ellipsoids.xml </ellipsoids>
+      <electric-field>
+        <grid> lig-PE0.dx </grid>
+      </electric-field>
+      <desolvation-field>
+        <grid> born-lig-PE0.dx </grid>
+      </desolvation-field>
+    </molecule1>
+    <time-step-tolerances>
+      <minimum-dx> 0.2 </minimum-dx>
+      <minimum-reaction-dx> 0.02 </minimum-reaction-dx>
+    </time-step-tolerances>
+    <reaction-file> rxn.xml </reaction-file>
+    <b-radius> 57.8935 </b-radius>
+    <BD-propagation-file> rna-lig-return-dist.xml </BD-propagation-file>
+  </molecule-pair>
+  <bin-file> rna-lig-bins.xml </bin-file>
+</root>
